@@ -16,9 +16,9 @@ const ZALO_ACCESS_TOKEN = "RR7tJJ6g7dnhiVH5EQqJTMIp_qi_jb8b6yx3GXQKH18kZC5EFi5O1
 // ===========================
 
 app.post("/webhook", async (req, res) => {
-  const userMessage = req.body.message?.text || "Xin chào";
-  const senderId = req.body.sender?.id || "zalo_user";
-
+  // Tạm dùng user cố định giống khi test trong Coze để đảm bảo bot phản hồi đúng
+const userMessage = req.body.message?.text || "Xin chào";
+const senderId = "admin_test"; // ← Thay bằng đúng user_id mà anh dùng test trong Coze Studio
   try {
     // Gọi Coze API
     const cozeRes = await axios.post(
