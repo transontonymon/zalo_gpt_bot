@@ -44,7 +44,7 @@ const senderId = "admin_test"; // ← Thay bằng đúng user_id mà anh dùng t
 
     // Gửi lại phản hồi cho người dùng Zalo
     await axios.post(
-      "https://openapi.zalo.me/v3.0/oa/message/cs",
+      "https://openapi.zalo.me/v3.0/oa/message",
       {
         recipient: { user_id: senderId },
         message: { text: reply }
