@@ -21,21 +21,23 @@ const userMessage = req.body.message?.text || "Xin chào";
 const senderId = "admin_test"; // ← Thay bằng đúng user_id mà anh dùng test trong Coze Studio
   try {
     // Gọi Coze API
-    const cozeRes = await axios.post(
-      COZE_API_URL,
-      {
-        bot_id: COZE_BOT_ID,
-        user: senderId,
-        query: userMessage
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${COZE_ACCESS_TOKEN}`,
-          "Content-Type": "application/json"
-        }
-      }
-    );
-
+   const cozeRes = await axios.post(
+  COZE_API_URL,
+  {
+    bot_id: COZE_BOT_ID,
+    user: senderId,
+    query: userMessage,
+    metadata: {
+      system_prompt: "Bạn là trợ lý AI của KCN Bảo Minh. Trả lời bằng tiếng Việt, chỉ dựa vào dữ liệu công ty cung cấp. Nếu không chắc chắn, hãy xin lỗi người dùng."
+    }
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${COZE_ACCESS_TOKEN}`,
+      "Content-Type": "application/json"
+    }
+  }
+);
     const reply = cozeRes.data?.messages?.[0]?.content || "Xin lỗi, tôi chưa có câu trả lời.";
 
     console.log("✅ Phản hồi từ Coze:", reply);
