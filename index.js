@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 // === THÔNG TIN CẤU HÌNH ===
 const COZE_API_URL = "https://api.coze.com/open_api/v2/chat";
 const COZE_BOT_ID = "7491980474345291777";
-const COZE_ACCESS_TOKEN = "pat_GCZAzVh7OxTCNBtsN9WbpT1doazwpdDxQju0cGOtHwN9ieI29fHtkNcl9aLdGj3E";
+const COZE_ACCESS_TOKEN = "pat_Ls7QUGDP0u2DEvU0hxPd8ksNbDNHPEQmCUVJtmOjrGTaNsbQHebsi3s5kYWZlwcd";
 
 // Access token của Zalo OA
 const ZALO_ACCESS_TOKEN = "RR7tJJ6g7dnhiVH5EQqJTMIp_qi_jb8b6yx3GXQKH18kZC5EFi5O1Ww9isOrnmPSFQMw1WVF2Lu6gU0GNjjCQsA7omHR_IDFMRcmF5JN7GT7agvcLFmK6awMdYTXa2TYJikK0Mkn0dvcov4rHO8WT4cPfoz5WHjqTU2MAbAVAcfGrv8FNAHyOK7ExaLCdqa-G_huP1ZWJpyhZDXX2ynW8bBJvKDxhcujI-txPaQAHpXyal9oUEnQFrIml7q8_G0jBFkkTNQtEXSlrQjS0xKi0Yteh49-d2jcVT2d9KsCB6OAdeGC1O9lVL_4XH9WW0v2UVARBrUw2MrKvPbKMle5R5YSgbD0WZmiVPpMOLx5EY5ZZvrmF9ma06R0oMT2WbGtVVdZ2KITSsnXyEy7VOi9R4ZfuXGQhbfxLrbgAzy9CxGRVG"; // ← thay bằng token thật
