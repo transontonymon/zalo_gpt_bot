@@ -42,7 +42,7 @@ app.post("/webhook", async (req, res) => {
 
     // Gửi lại phản hồi cho người dùng Zalo
     await axios.post(
-      "https://openapi.zalo.me/v3.0/oa/message",
+      "https://openapi.zalo.me/v3.0/oa/message/cs",
       {
         recipient: { user_id: senderId },
         message: { text: reply }
