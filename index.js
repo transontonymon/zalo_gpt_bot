@@ -17,6 +17,8 @@ const ZALO_ACCESS_TOKEN = "RR7tJJ6g7dnhiVH5EQqJTMIp_qi_jb8b6yx3GXQKH18kZC5EFi5O1
 const sessionData = {}; // Bộ nhớ tạm theo user
 
 app.post("/webhook", async (req, res) => {
+  console.log("📥 Webhook đến:", JSON.stringify(req.body, null, 2));
+
   const senderId = req.body.sender?.id;
   const name = req.body.sender?.name || "unknown";
   const message = req.body.message;
