@@ -92,8 +92,13 @@ app.post("/webhook", async (req, res) => {
     } catch (err) {
       console.error("❌ Lỗi ghi Google Sheet:", err);
     }
-  } else if (userMessage) {
+  }
+
+  // Gửi tất cả tin nhắn text sang Coze bất kể trạng thái
+  if (userMessage) {
     try {
+      console.log("👉 Gửi tới Coze:", userMessage);
+
       const cozeRes = await axios.post(
         COZE_API_URL,
         {
