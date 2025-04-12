@@ -37,8 +37,11 @@ app.post("/webhook", async (req, res) => {
     };
   }
 
+  let userMessage = "";
+
   if (type === "text") {
     const text = message.text;
+    userMessage = text;
     if (/^\d{9,11}$/.test(text)) {
       sessionData[senderId].phone = text;
     }
@@ -88,6 +91,41 @@ app.post("/webhook", async (req, res) => {
       delete sessionData[senderId];
     } catch (err) {
       console.error("❌ Lỗi ghi Google Sheet:", err);
+    }
+  } else if (userMessage) {
+    try {
+      const cozeRes = await axios.post(
+        COZE_API_URL,
+        {
+          bot_id: COZE_BOT_ID,
+          user: senderId,
+          query: userMessage
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${COZE_ACCESS_TOKEN}`,
+            "Content-Type": "application/json"
+          }
+        }
+      );
+
+      const reply = cozeRes.data?.messages?.[0]?.content || "🤖 Bot chưa hiểu, bạn nói lại nhé!";
+
+      await axios.post(
+        "https://openapi.zalo.me/v3.0/oa/message/cs",
+        {
+          recipient: { user_id: senderId },
+          message: { text: reply }
+        },
+        {
+          headers: {
+            access_token: ZALO_ACCESS_TOKEN,
+            "Content-Type": "application/json"
+          }
+        }
+      );
+    } catch (err) {
+      console.error("❌ Lỗi gọi Coze API:", err);
     }
   }
 
