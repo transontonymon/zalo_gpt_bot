@@ -98,7 +98,7 @@ app.post("/webhook", async (req, res) => {
         COZE_API_URL,
         {
           bot_id: COZE_BOT_ID,
-          user: senderId,
+          user: `test_user_${senderId}`,
           query: userMessage
         },
         {
@@ -110,6 +110,7 @@ app.post("/webhook", async (req, res) => {
       );
 
       const reply = cozeRes.data?.messages?.[0]?.content || "🤖 Bot chưa hiểu, bạn nói lại nhé!";
+      console.log("🧠 Phản hồi từ Coze:", reply);
 
       await axios.post(
         "https://openapi.zalo.me/v3.0/oa/message/cs",
@@ -125,7 +126,7 @@ app.post("/webhook", async (req, res) => {
         }
       );
     } catch (err) {
-      console.error("❌ Lỗi gọi Coze API:", err);
+      console.error("❌ Lỗi gọi Coze API:", err.response?.data || err.message);
     }
   }
 
