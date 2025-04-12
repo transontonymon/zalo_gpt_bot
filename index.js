@@ -22,7 +22,7 @@ app.post("/webhook", async (req, res) => {
   const senderId = req.body.sender?.id;
   const name = req.body.sender?.name || "unknown";
   const message = req.body.message;
-  const type = message?.type;
+  const type = message?.type || message?.attachments?.[0]?.type;
 
   if (!senderId || !message) {
     return res.sendStatus(200);
@@ -45,14 +45,14 @@ app.post("/webhook", async (req, res) => {
   }
 
   if (type === "location") {
-    const { latitude, longitude } = message.location || {};
-    if (latitude && longitude) {
-      sessionData[senderId].location = `${latitude}, ${longitude}`;
+    const coords = message.attachments?.[0]?.payload?.coordinates;
+    if (coords?.latitude && coords?.longitude) {
+      sessionData[senderId].location = `${coords.latitude}, ${coords.longitude}`;
     }
   }
 
   if (type === "image") {
-    const imageUrl = message.url;
+    const imageUrl = message.attachments?.[0]?.payload?.url || message.url;
     if (imageUrl) {
       sessionData[senderId].image = imageUrl;
     }
