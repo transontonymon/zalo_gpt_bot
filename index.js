@@ -103,7 +103,7 @@ app.post("/webhook", async (req, res) => {
         COZE_API_URL,
         {
           bot_id: COZE_BOT_ID,
-          user: `test_user_${senderId}`,
+          user: senderId,
           query: userMessage
         },
         {
